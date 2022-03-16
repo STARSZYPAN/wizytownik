@@ -1,5 +1,4 @@
-#import email
-#from tkinter import END
+
 from faker import Faker
 fake = Faker("pl_PL")
 
@@ -15,38 +14,23 @@ class BaseContact:
     def __str__(self):
         return f"{self.first_name} {self.last_name}, {self.tel_priv}"
 
+    def __repr__(self):
+        return self.__str__()
+
+    @property    
+    def contact_phone(self):
+        return self.tel_priv
+    @property
+    def label_length(self):
+        return len(f"{self.first_name} {self.last_name}")
+
 
     def contact(self):
         return f"Wybieram numer domowy: {self.tel_priv} i dzwonię do {self.first_name} {self.last_name}. "
     
-    def show_contact(self):
-        wybór_operacji=int(input("Jaki typ kontaktu chcesz wywołać? 1-prywatny,2-firmowy :  "))
-        if wybór_operacji==1:  
-            print(osoba.contact())
-        if wybór_operacji==2:
-            print(osoba)
-            print(osoba.work_contact())
-
-    @property
-    def label_length(self):
-            return len(f"{self.first_name} {self.last_name}")
-
-    def add_contact(self):
-        dodaj_kontakt=int(input("Czy czcesz dodać nowy kontakt do listy? TAK-1/NIE-2:  "))  
-        if dodaj_kontakt==1:
-            print(osoba_2)
-            print()
-            print("Dodano osobę do listy kontaktów!")
-            
-        if dodaj_kontakt==2:
-            print("Dziękuję,kończę program!")
-
-
    
 
-@property
-def contact(self):
-    return self.tel_priv
+
     
 class BusinessContact(BaseContact):
     
@@ -63,22 +47,48 @@ class BusinessContact(BaseContact):
     def work_contact(self):
         return f"{self.first_name} {self.last_name},wybieram numer firmowy: {self.tel_work} i dzwonię do {self.first_name} {self.last_name}."
     
-@property
-def work_contact(self):
-    return self.tel_work
-    
-    
-  
+    @property    
+    def contact_phone(self):
+        return self.tel_work
 
 
 osoba = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(),company=fake.company(), occupation=fake.job(), tel_priv=fake.phone_number(), tel_work=fake.phone_number())
-osoba_2=BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(),company=fake.company(), occupation=fake.job(), tel_priv=fake.phone_number(), tel_work=fake.phone_number()) 
-print(osoba.show_contact())
-print()
+print(osoba.contact())
+print(osoba.work_contact())
 print(osoba.label_length)
-print(osoba.add_contact())
 
 
+
+
+
+def create_contacts(contact_type="private", n=1):
+
+    contacts = []
+
+    for i in range(n):
+        if contact_type == "private":
+            card = BaseContact(
+                first_name=fake.first_name(), 
+                last_name=fake.last_name(),
+                tel_priv=fake.phone_number(),
+            )
+        else:
+            card = BusinessContact(
+                first_name=fake.first_name(), 
+                last_name=fake.last_name(),
+                tel_priv=fake.phone_number(),
+                tel_work=fake.phone_number(),
+                company=fake.company(), 
+                occupation=fake.job(), 
+            )    
+        contacts.append(card)
+    return contacts
+
+
+    
+
+print(create_contacts())
+print(create_contacts(contact_type="business"))
 
 
 
