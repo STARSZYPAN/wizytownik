@@ -28,7 +28,7 @@ class BaseContact:
         return f"Wybieram numer domowy: {self.contact_phone} i dzwonię do {self.first_name} {self.last_name}. "
     
    
-
+print()
 
     
 class BusinessContact(BaseContact):
@@ -42,7 +42,7 @@ class BusinessContact(BaseContact):
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.occupation} {self.company} {self.tel_work}"
 
-    property    
+    @property    
     def contact_phone(self):
         return self.tel_work
 
@@ -57,7 +57,7 @@ print(osoba.contact())
 print(osoba.label_length)
 
 
-
+print()
 
 
 def create_contacts(contact_type="private", n=1):
