@@ -26,7 +26,7 @@ class BaseContact:
 
 
     def contact(self):
-        return f"Wybieram numer domowy: {self.tel_priv} i dzwonię do {self.first_name} {self.last_name}. "
+        return f"Wybieram numer domowy: {self.contact_phone} i dzwonię do {self.first_name} {self.last_name}. "
     
    
 
@@ -47,9 +47,7 @@ class BusinessContact(BaseContact):
     def work_contact(self):
         return f"{self.first_name} {self.last_name},wybieram numer firmowy: {self.tel_work} i dzwonię do {self.first_name} {self.last_name}."
     
-    @property    
-    def contact_phone(self):
-        return self.tel_work
+    
 
 
 osoba = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(),company=fake.company(), occupation=fake.job(), tel_priv=fake.phone_number(), tel_work=fake.phone_number())
