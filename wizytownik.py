@@ -1,4 +1,3 @@
-
 from faker import Faker
 fake = Faker("pl_PL")
 
@@ -43,8 +42,11 @@ class BusinessContact(BaseContact):
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.occupation} {self.company} {self.tel_work}"
 
+    property    
+    def contact_phone(self):
+        return self.tel_work
 
-    def work_contact(self):
+    def contact(self):
         return f"{self.first_name} {self.last_name},wybieram numer firmowy: {self.tel_work} i dzwonię do {self.first_name} {self.last_name}."
     
     
@@ -52,7 +54,6 @@ class BusinessContact(BaseContact):
 
 osoba = BusinessContact(first_name=fake.first_name(), last_name=fake.last_name(),company=fake.company(), occupation=fake.job(), tel_priv=fake.phone_number(), tel_work=fake.phone_number())
 print(osoba.contact())
-print(osoba.work_contact())
 print(osoba.label_length)
 
 
@@ -87,8 +88,3 @@ def create_contacts(contact_type="private", n=1):
 
 print(create_contacts())
 print(create_contacts(contact_type="business"))
-
-
-
-
-
